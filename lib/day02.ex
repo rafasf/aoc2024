@@ -13,29 +13,29 @@ defmodule Day02 do
 
   def part1(input) do
     input
-    |> Enum.filter(&is_safe_report/1)
+    |> Enum.filter(&safe_report?/1)
     |> length()
   end
 
-  defp is_safe_report(report) do
-    is_between_range = fn a, b ->
+  defp safe_report?(report) do
+    between_range? = fn a, b ->
       abs(b - a) <= 3 and abs(b - a) >= 1
     end
 
     increasing =
       Enum.chunk_every(report, 2, 1, :discard)
-      |> Enum.all?(fn [a, b] -> a < b and is_between_range.(a, b) end)
+      |> Enum.all?(fn [a, b] -> a < b and between_range?.(a, b) end)
 
     decreasing =
       Enum.chunk_every(report, 2, 1, :discard)
-      |> Enum.all?(fn [a, b] -> a > b and is_between_range.(a, b) end)
+      |> Enum.all?(fn [a, b] -> a > b and between_range?.(a, b) end)
 
     increasing or decreasing
   end
 
   def part2(input) do
     input
-    |> Enum.split_with(&is_safe_report/1)
+    |> Enum.split_with(&safe_report?/1)
     |> then(fn {safe, unsafe} ->
       tolerated =
         unsafe
@@ -49,7 +49,7 @@ defmodule Day02 do
   defp can_be_safe?(report) do
     0..(length(report) - 1)
     |> Enum.any?(fn index ->
-      is_safe_report(List.delete_at(report, index))
+      safe_report?(List.delete_at(report, index))
     end)
   end
 end

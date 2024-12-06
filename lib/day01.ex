@@ -1,6 +1,6 @@
-defmodule Dayone do
+defmodule Day01 do
   def parse(file_name) do
-    File.read!("lib/day1/#{file_name}")
+    File.read!("lib/day01/#{file_name}")
     |> String.split("\n", trim: true)
     |> Enum.map(&parse_line/1)
     |> Enum.zip_with(&Function.identity/1)

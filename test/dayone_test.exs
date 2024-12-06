@@ -13,4 +13,9 @@ defmodule DayoneTest do
     input = Dayone.parse("input_sample.txt")
     assert Dayone.part1(input) == 11
   end
+
+  test "calculate similarity score" do
+    input = Dayone.parse("input_sample.txt")
+    assert Dayone.part2(input) == 31
+  end
 end

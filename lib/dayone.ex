@@ -20,6 +20,12 @@ defmodule Dayone do
     |> Enum.sum()
   end
 
-  def part2 do
+  def part2(input) do
+    [left, right] = input
+
+    left
+    |> Enum.map(fn element -> [element, Enum.count(right, &(&1 == element))] end)
+    |> Enum.map(fn [a, b] -> a * b end)
+    |> Enum.sum()
   end
 end

@@ -35,5 +35,21 @@ defmodule Day02 do
 
   def part2(input) do
     input
+    |> Enum.split_with(&is_safe_report/1)
+    |> then(fn {safe, unsafe} ->
+      tolerated =
+        unsafe
+        |> Enum.filter(&can_be_safe?/1)
+
+      safe ++ tolerated
+    end)
+    |> length()
+  end
+
+  defp can_be_safe?(report) do
+    0..(length(report) - 1)
+    |> Enum.any?(fn index ->
+      is_safe_report(List.delete_at(report, index))
+    end)
   end
 end

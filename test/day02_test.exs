@@ -17,4 +17,9 @@ defmodule Day02Test do
     input = Day02.parse("input_sample.txt")
     assert Day02.part1(input) == 2
   end
+
+  test "returns number of safe reports with tolerance" do
+    input = Day02.parse("input_sample.txt")
+    assert Day02.part2(input) == 4
+  end
 end

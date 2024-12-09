@@ -40,15 +40,12 @@ defmodule Day04 do
       next_row = row + index * d_row
       next_col = col + index * d_col
 
-      in_bounds =
-        next_row >= 0 and next_row < length(input) and
-          next_col >= 0 and next_col < length(List.first(input))
-
-      in_bounds and Enum.at(Enum.at(input, next_row), next_col) == String.at(word, index)
+      in_bounds?(input, next_row, next_col) and
+        Enum.at(Enum.at(input, next_row), next_col) == String.at(word, index)
     end)
   end
 
-  defp in_bounds(matrix, row, col) do
+  defp in_bounds?(matrix, row, col) do
     row >= 0 and row < length(matrix) and
       col >= 0 and col < length(List.first(matrix))
   end
@@ -72,7 +69,7 @@ defmodule Day04 do
         down_right = {row + 1, col + 1, :down_right}
 
         positions = [up_left, up_right, down_left, down_right]
-        all_in_bounds = Enum.all?(positions, fn {r, c, _} -> in_bounds(input, r, c) end)
+        all_in_bounds = Enum.all?(positions, fn {r, c, _} -> in_bounds?(input, r, c) end)
 
         if all_in_bounds do
           ms =

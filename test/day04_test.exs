@@ -21,4 +21,9 @@ defmodule Day04Test do
     input = Day04.parse("input_sample.txt")
     assert Day04.part1(input) == 18
   end
+
+  test "returns number of occurences of x-mas" do
+    input = Day04.parse("input_sample.txt")
+    assert Day04.part2(input) == 9
+  end
 end

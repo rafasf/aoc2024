@@ -38,4 +38,9 @@ defmodule Day05Test do
     input = Day05.parse("input_sample.txt")
     assert Day05.part1(input) == 143
   end
+
+  test "sum middle pages of corrected pages" do
+    input = Day05.parse("input_sample.txt")
+    assert Day05.part2(input) == 123
+  end
 end

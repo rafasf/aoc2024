@@ -6,21 +6,28 @@ defmodule Day05 do
   end
 
   def part1(input) do
-    ordering =
-      input
-      |> Enum.filter(fn line -> length(line) == 2 end)
-      |> Enum.group_by(
-        fn [key, _value] -> key end,
-        fn [_key, value] -> value end
-      )
+    order_rules = order_rules_from(input)
 
     input
     |> Enum.filter(fn line -> length(line) > 2 end)
-    |> Enum.filter(fn line -> correct?(ordering, Enum.reverse(line)) end)
+    |> Enum.filter(fn line -> correct?(order_rules, Enum.reverse(line)) end)
     |> Enum.map(fn line ->
       String.to_integer(Enum.at(line, div(length(line), 2)))
     end)
     |> Enum.sum()
+  end
+
+  def part2(input) do
+    input
+  end
+
+  defp order_rules_from(input) do
+    input
+    |> Enum.filter(fn line -> length(line) == 2 end)
+    |> Enum.group_by(
+      fn [key, _value] -> key end,
+      fn [_key, value] -> value end
+    )
   end
 
   defp correct?(_order_rules, []), do: true
@@ -34,9 +41,5 @@ defmodule Day05 do
     else
       correct?(order_rules, rest)
     end
-  end
-
-  def part2(input) do
-    input
   end
 end
